@@ -8,11 +8,11 @@
 
     <toc-element topic="001-00-introduction.md"/>
     <toc-element topic="002-00-TypeScript.md"/>
-    <toc-element topic="003-00-Les-contrôleurs.md"/>
+    <toc-element topic="003-00-Les-controleurs.md"/>
     <toc-element topic="004-00-Organisation-du-code.md"/>
     <toc-element topic="005-00-La-validation.md"/>
     <toc-element topic="006-00-Les-services.md"/>
     <toc-element topic="007-00-Liaison-avec-MongoDB.md"/>
     <toc-element topic="008-00-Plus-loin-avec-Mongoose.md"/>
-    <toc-element topic="015-00-La-sécurité.md"/>
+    <toc-element topic="015-00-La-securite.md"/>
 </instance-profile>
