@@ -1,0 +1,204 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#307FFF"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2025-02-25T08:06:46.529932"><title>TypeScript | nestjs</title><script type="application/json" id="virtual-toc-data">[{"id":"les-bases-de-typescript","level":0,"title":"Les bases de TypeScript","anchor":"#les-bases-de-typescript"},{"id":"les-classes","level":0,"title":"Les classes","anchor":"#les-classes"},{"id":"comment-utiliser-typescript","level":0,"title":"Comment utiliser TypeScript","anchor":"#comment-utiliser-typescript"},{"id":"avantages-de-typescript","level":0,"title":"Avantages de TypeScript","anchor":"#avantages-de-typescript"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.10.0-b575/app.css" rel="stylesheet"><meta name="msapplication-TileColor" content="#000000"><link rel="apple-touch-icon" sizes="180x180" href="https://jetbrains.com/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://jetbrains.com/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://jetbrains.com/favicon-16x16.png"><meta name="msapplication-TileImage" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-144x144.png"><meta name="msapplication-square70x70logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-70x70.png"><meta name="msapplication-square150x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x150.png"><meta name="msapplication-square310x310logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x310.png"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="TypeScript | nestjs"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="nestjs Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/002-00-typescript.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="TypeScript | nestjs"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/002-00-typescript.html#webpage",
+    "url": "writerside-documentation/002-00-typescript.html",
+    "name": "TypeScript | nestjs",
+    "description": "",
+    "image": "",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "nestjs Help"
+}</script><!-- End Schema.org --></head><body data-id="002-00-TypeScript" data-main-title="TypeScript" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs=""><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>nestjs  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="002-00-TypeScript" id="002-00-TypeScript.md">TypeScript</h1><p id="-b3r0i3_3">TypeScript est un superset de JavaScript d&eacute;velopp&eacute; par Microsoft. Cela signifie qu'il ajoute des fonctionnalit&eacute;s suppl&eacute;mentaires &agrave; JavaScript tout en restant compatible avec lui. Son principal objectif est d'am&eacute;liorer la s&eacute;curit&eacute; du code et la productivit&eacute; des d&eacute;veloppeurs gr&acirc;ce &agrave; un syst&egrave;me de types statiques.</p><p id="-b3r0i3_4">Avant le d&eacute;ploiement, les fichiers <code class="code" id="-b3r0i3_9">TypeScript</code> (.ts) seront transpil&eacute;s (combinaison de translation et compilation) pour g&eacute;n&eacute;rer des fichiers <code class="code" id="-b3r0i3_10">Javascript</code> que les navigateurs savent interpr&eacute;ter.</p><section class="chapter"><h2 id="les-bases-de-typescript" data-toc="les-bases-de-typescript">Les bases de TypeScript</h2><section class="chapter"><h3 id="variables-scalaires" data-toc="variables-scalaires">Variables scalaires</h3><div class="code-block" data-lang="ts">
+// Le type est déclaré 
+// après le nom de la variable
+// et avant l'affectation
+let message: string = &quot;Hello, TypeScript!&quot;;
+let age: number = 30;
+let isActive: boolean = true;
+</div></section><section class="chapter"><h3 id="variables-composites" data-toc="variables-composites">Variables composites</h3><section class="chapter"><h4 id="tableaux" data-toc="tableaux">Tableaux</h4><div class="code-block" data-lang="ts">
+// Tableau de chaînes
+let names: string[] = [
+    &quot;Alice&quot;, &quot;Bob&quot;, &quot;Charlie&quot;
+]; 
+// Syntaxe alternative
+let names: Array&lt;string&gt; = [
+    &quot;Alice&quot;, &quot;Bob&quot;, &quot;Charlie&quot;
+]; 
+</div></section><section class="chapter"><h4 id="objets-litt-raux" data-toc="objets-litt-raux">Objets litt&eacute;raux</h4><div class="code-block" data-lang="ts">
+let user: { name: string; age: number } = { name: &quot;Alix&quot;, age: 25 };
+</div></section><section class="chapter"><h4 id="tableaux-d-objets" data-toc="tableaux-d-objets">Tableaux d'objets</h4><div class="code-block" data-lang="ts">
+let users: Array&lt;{ name: string; age: number }&gt; = [
+    { name: &quot;Alix&quot;, age: 25 },
+    { name: &quot;Sidonie&quot;, age: 24 },
+    { name: &quot;Aoife&quot;, age: 34 }
+];
+</div></section></section><section class="chapter"><h3 id="interfaces" data-toc="interfaces">Interfaces</h3><p id="-b3r0i3_26">Les interfaces permettent de d&eacute;finir des structures d&rsquo;objets et sont tr&egrave;s utilis&eacute;es pour les API et la programmation orient&eacute;e objet. Avec TypeScript elles servent &eacute;galement &agrave; simplifier l'utilisation d'objets litt&eacute;raux.</p><div class="code-block" data-lang="none">
+interface UserInterface {
+   name: string; 
+   age: number;
+}
+
+let users: UserInteface[] = [
+    { name: &quot;Alix&quot;, age: 25 },
+    { name: &quot;Sidonie&quot;, age: 24 },
+    { name: &quot;Aoife&quot;, age: 34 }
+];
+
+// ou bien
+let users: Array&lt;UserInteface&gt; = [
+    { name: &quot;Alix&quot;, age: 25 },
+    { name: &quot;Sidonie&quot;, age: 24 },
+    { name: &quot;Aoife&quot;, age: 34 }
+];
+</div></section><section class="chapter"><h3 id="classes" data-toc="classes">Classes</h3><p id="-b3r0i3_28">Il est bien entendu possible de typer sur une classe.</p><div class="code-block" data-lang="ts">
+let request: Request = new Request();
+</div></section><section class="chapter"><h3 id="fonctions" data-toc="fonctions">Fonctions</h3><p id="-b3r0i3_30">Il est non seulement possible de typer les arguments d'une fonction, mais aussi sa valeur de retour.</p><div class="code-block" data-lang="ts">
+fonction greet(name: string): string{
+    return `Hello ${name}`;
+}
+</div><aside class="prompt" data-type="tip" data-title="" id="-b3r0i3_32"><p id="-b3r0i3_34">Si une fonction ne retourne rien, le type de retour sera <code class="code" id="-b3r0i3_35">void</code>.</p></aside><div class="code-block" data-lang="ts">
+    function sayHello():void{
+        console.log('Hello');
+    }
+</div></section><section class="chapter"><h3 id="types-g-n-riques" data-toc="types-g-n-riques">Types g&eacute;n&eacute;riques</h3><div class="code-block" data-lang="ts">
+function identity&lt;T&gt;(value: T): T {
+  return value;
+}
+
+console.log(identity&lt;string&gt;(&quot;Hello&quot;)); // &quot;Hello&quot;
+console.log(identity&lt;number&gt;(42)); // 42
+
+</div></section><section class="chapter"><h3 id="enum-rations" data-toc="enum-rations">Enum&eacute;rations</h3><p id="-b3r0i3_37">En TypeScript, un enum (abr&eacute;viation de &quot;enumeration&quot;) est une mani&egrave;re de d&eacute;finir un groupe de constantes nomm&eacute;es.</p><p id="-b3r0i3_38">Les enum sont utilis&eacute;s pour repr&eacute;senter un ensemble de valeurs possibles qui sont fixes et permettent de rendre le code plus lisible et compr&eacute;hensible.</p><p id="-b3r0i3_39">Cela permet en quelque sorte d'attribuer un namespace &agrave; un groupe de constantes.</p><div class="code-block" data-lang="ts">
+const enum Direction {
+  Up = &quot;UP&quot;,
+  Down = &quot;DOWN&quot;,
+  Left = &quot;LEFT&quot;,
+  Right = &quot;RIGHT&quot;,
+}
+
+let move: Direction = Direction.Up;
+console.log(move); // &quot;UP&quot;
+
+</div></section><section class="chapter"><h3 id="union-type" data-toc="union-type">Union type</h3><p id="-b3r0i3_41">Permet de typer sur plusieurs types.</p><div class="code-block" data-lang="ts">
+function double(value: string | number): string | number {
+  if (typeof value === &quot;number&quot;) {
+    return value * 2;
+  } else {
+    return value.repeat(2);
+  }
+}
+
+console.log(double(5));     // 10
+console.log(double(&quot;Hi&quot;));  // &quot;HiHi&quot;
+</div><aside class="prompt" data-type="tip" data-title="" id="-b3r0i3_43"><p id="-b3r0i3_46">Il existe &eacute;galement un type <code class="code" id="-b3r0i3_47">any</code> qui remplace tous les types, mais il est &agrave; utiliser avec parcimonie.</p></aside><section class="chapter"><h4 id="variable-ou-propri-t-nullable" data-toc="variable-ou-propri-t-nullable">Variable ou propri&eacute;t&eacute; nullable</h4><div class="code-block" data-lang="ts">
+let userName: string = null; // ❌ Erreur
+let age: number = undefined; // ❌ Erreur
+
+let userName: string | null = null; // ✅ OK
+let age: number | undefined = undefined; // ✅ OK
+</div></section><section class="chapter"><h4 id="null-coalesce" data-toc="null-coalesce">Null coalesce</h4><p id="-b3r0i3_49">L&rsquo;op&eacute;rateur <code class="code" id="-b3r0i3_51">??</code> renvoie la valeur de droite si la valeur de gauche est <code class="code" id="-b3r0i3_52">null</code> ou <code class="code" id="-b3r0i3_53">undefined</code>.</p><div class="code-block" data-lang="ts">
+let input: string | null = null;
+let output = input ?? &quot;Default Value&quot;; // ✅ &quot;Default Value&quot;
+console.log(output);
+</div></section></section></section><section class="chapter"><h2 id="les-classes" data-toc="les-classes">Les classes</h2><p id="-b3r0i3_54">TypeScript apporte quelques am&eacute;liorations par rapport aux classes JavaScript.</p><section class="chapter"><h3 id="les-op-rateurs-de-port-e" data-toc="les-op-rateurs-de-port-e">Les op&eacute;rateurs de port&eacute;e</h3><p id="-b3r0i3_60">Comme dans bien d'autres langages de programmation orient&eacute;s objet, la port&eacute;e des propri&eacute;t&eacute;s ou des m&eacute;thodes est g&eacute;r&eacute;e par les mots-clefs <code class="code" id="-b3r0i3_62">public</code>, <code class="code" id="-b3r0i3_63">protected</code> ou <code class="code" id="-b3r0i3_64">private</code>.</p><div class="code-block" data-lang="ts">
+
+class User {
+    private name: string;
+    private age: number;
+    
+    // public étant la portée par défaut, 
+    // il est possible d'omettre l'opérateur
+    public constructor(name: string, age: number): void {
+        this.name = name;
+        this.age = age;
+    }
+}
+
+</div></section><section class="chapter"><h3 id="la-promotion-des-arguments-du-constructeur" data-toc="la-promotion-des-arguments-du-constructeur">La promotion des arguments du constructeur</h3><p id="-b3r0i3_65">La promotion des arguments du constructeur en TypeScript permet de d&eacute;clarer et d'initialiser automatiquement les propri&eacute;t&eacute;s d'une classe directement dans le constructeur. Cela &eacute;vite d&rsquo;&eacute;crire du code r&eacute;p&eacute;titif et am&eacute;liore la lisibilit&eacute;.</p><div class="code-block" data-lang="ts">
+class Person {
+  constructor(
+    public name: string, 
+    public age: number
+  ) {}
+}
+</div></section><section class="chapter"><h3 id="propri-t-en-lecture-seule" data-toc="propri-t-en-lecture-seule">propri&eacute;t&eacute; en lecture seule</h3><p id="-b3r0i3_67">l'op&eacute;rateur <code class="code" id="-b3r0i3_69">readonly</code> d&eacute;finit qu'une propri&eacute;t&eacute; est en lecture seule.</p><div class="code-block" data-lang="ts">
+class Product {
+  constructor(
+    public readonly id: number, 
+    public name: string
+  ) {}
+}
+
+const product = new Product(1, &quot;Laptop&quot;);
+console.log(product.id); // ok 1
+product.id = 2; // Erreur : `id` est `readonly`
+</div></section><section class="chapter"><h3 id="propri-t-optionnelle" data-toc="propri-t-optionnelle">Propri&eacute;t&eacute; optionnelle</h3><p id="-b3r0i3_70">Une propri&eacute;t&eacute; optionnelle peut &ecirc;tre <code class="code" id="-b3r0i3_73">undefined</code>, mais pas <code class="code" id="-b3r0i3_74">null</code>. Pour la d&eacute;clarer comme tel, il faut placer un <code class="code" id="-b3r0i3_75">?</code>apr&eacute;s le nom de la variable.</p><div class="code-block" data-lang="ts">
+class Person {
+  constructor(
+    public name: string, 
+    public age?: number
+  ) {}
+}
+</div><section class="chapter"><h4 id="cha-nage-optionnel" data-toc="cha-nage-optionnel">Cha&icirc;nage optionnel</h4><div class="code-block" data-lang="ts">
+const user = {
+  name: &quot;Alice&quot;,
+  address: null,
+};
+
+//undefined (évite une erreur)
+console.log(user.address?.street); 
+</div></section></section><section class="chapter"><h3 id="propri-t-initialis-e-plus-tard" data-toc="propri-t-initialis-e-plus-tard">Propri&eacute;t&eacute; initialis&eacute;e plus tard</h3><p id="-b3r0i3_77">Parfois, une propri&eacute;t&eacute; ne peut pas &ecirc;tre initialis&eacute;e imm&eacute;diatement. L&rsquo;op&eacute;rateur <code class="code" id="-b3r0i3_79">!</code> (Non-null Assertion Operator) indique &agrave; TypeScript que la valeur sera d&eacute;finie.</p><div class="code-block" data-lang="ts">
+class Config {
+  // `!` : TypeScript suppose qu'elle sera définie plus tard
+  databaseUrl!: string; 
+
+  setDatabase(url: string) {
+    this.databaseUrl = url;
+  }
+
+  getDatabase(): string {
+    return this.databaseUrl;
+  }
+}
+
+const config = new Config();
+config.setDatabase(&quot;https://mydatabase.com&quot;);
+console.log(config.getDatabase()); // ✅ &quot;https://mydatabase.com&quot;
+</div></section></section><section class="chapter"><h2 id="comment-utiliser-typescript" data-toc="comment-utiliser-typescript">Comment utiliser TypeScript</h2><aside class="prompt" data-type="tip" data-title="" id="-b3r0i3_80"><p id="-b3r0i3_84">Cette proc&eacute;dure est inutile avec <code class="code" id="-b3r0i3_85">Nestjs</code> ou <code class="code" id="-b3r0i3_86">Angular</code> car les fichiers sont automatiquement transpil&eacute;s par le framework.</p></aside><section class="chapter"><h3 id="transpiler-un-seul-fichier" data-toc="transpiler-un-seul-fichier">Transpiler un seul fichier</h3><section class="procedure-steps" id="-b3r0i3_87"><ol class="list _decimal"><li class="list__item" id="-b3r0i3_88"><p>Installation </p><div class="code-block" data-lang="bash">
+npm install -g typescript
+</div></li><li class="list__item" id="-b3r0i3_89"><p>Transpiler un ficher TypeScript en Javascript </p><div class="code-block" data-lang="bash">
+tsc fichier.ts
+</div></li><li class="list__item" id="-b3r0i3_90"><p>Ex&eacute;cuter avec Nodejs (apr&egrave;s compilation) </p><div class="code-block" data-lang="bash">
+node fichier.js
+</div></li></ol></section></section><section class="chapter"><h3 id="transpiler-plusieurs-fichiers" data-toc="transpiler-plusieurs-fichiers">Transpiler plusieurs fichiers</h3><section class="procedure-steps" id="-b3r0i3_94"><ol class="list _decimal"><li class="list__item" id="-b3r0i3_96"><p>Cr&eacute;er un fichier de configuration </p><div class="code-block" data-lang="bash">
+tsc --init
+</div></li><li class="list__item" id="-b3r0i3_97"><p>Cr&eacute;er un fichier de configuration </p><div class="code-block" data-lang="bash">
+tsc --init
+</div></li><li class="list__item" id="-b3r0i3_98"><p>Modifier le fichier tsconfig.json </p><div class="code-block" data-lang="json">
+{
+  &quot;compilerOptions&quot;: {
+    &quot;target&quot;: &quot;ES6&quot;,              
+    &quot;module&quot;: &quot;CommonJS&quot;,          
+    &quot;outDir&quot;: &quot;./dist&quot;,            
+    &quot;rootDir&quot;: &quot;./src&quot;,            
+    &quot;strict&quot;: true,                
+    &quot;noImplicitAny&quot;: true,         
+    &quot;esModuleInterop&quot;: true        
+  },
+  &quot;include&quot;: [&quot;src/**/*&quot;],
+  &quot;exclude&quot;: [&quot;node_modules&quot;]
+}
+</div></li><li class="list__item" id="-b3r0i3_99"><p>Transpiler </p><div class="code-block" data-lang="bash">
+tsc
+</div><p id="-b3r0i3_104">Ou bien activer la transpilation automatique &agrave; chaque changement dans le code source</p><div class="code-block" data-lang="bash">
+tsc --watch
+</div></li></ol></section><section class="chapter"><h4 id="explication-des-options-de-tsconfig" data-toc="explication-des-options-de-tsconfig">Explication des options de tsconfig</h4><div class="table-wrapper"><table class="wide" id="-b3r0i3_106"><thead><tr class="ijRowHead" id="-b3r0i3_108"><th id="-b3r0i3_116"><p>Option</p></th><th id="-b3r0i3_117"><p>Explication</p></th></tr></thead><tbody><tr id="-b3r0i3_109"><td id="-b3r0i3_118"><p><code class="code" id="-b3r0i3_120">&quot;target&quot;: &quot;ES6&quot;</code></p></td><td id="-b3r0i3_119"><p>Compile TypeScript en JavaScript ES6.</p></td></tr><tr id="-b3r0i3_110"><td id="-b3r0i3_121"><p><code class="code" id="-b3r0i3_123">&quot;module&quot;: &quot;CommonJS&quot;</code></p></td><td id="-b3r0i3_122"><p>Utilis&eacute; pour Node.js.</p></td></tr><tr id="-b3r0i3_111"><td id="-b3r0i3_124"><p><code class="code" id="-b3r0i3_126">&quot;outDir&quot;: &quot;./dist&quot;</code></p></td><td id="-b3r0i3_125"><p>Met les fichiers <code class="code" id="-b3r0i3_127">.js</code> compil&eacute;s dans <code class="code" id="-b3r0i3_128">dist/</code>.</p></td></tr><tr id="-b3r0i3_112"><td id="-b3r0i3_129"><p><code class="code" id="-b3r0i3_131">&quot;rootDir&quot;: &quot;./src&quot;</code></p></td><td id="-b3r0i3_130"><p>Indique o&ugrave; sont les fichiers <code class="code" id="-b3r0i3_132">.ts</code>.</p></td></tr><tr id="-b3r0i3_113"><td id="-b3r0i3_133"><p><code class="code" id="-b3r0i3_135">&quot;strict&quot;: true</code></p></td><td id="-b3r0i3_134"><p>Active toutes les v&eacute;rifications strictes (meilleure s&eacute;curit&eacute;).</p></td></tr><tr id="-b3r0i3_114"><td id="-b3r0i3_136"><p><code class="code" id="-b3r0i3_138">&quot;noImplicitAny&quot;: true</code></p></td><td id="-b3r0i3_137"><p>Interdit <code class="code" id="-b3r0i3_139">any</code> implicite (&eacute;vite les erreurs de typage).</p></td></tr><tr id="-b3r0i3_115"><td id="-b3r0i3_140"><p><code class="code" id="-b3r0i3_142">&quot;esModuleInterop&quot;: true</code></p></td><td id="-b3r0i3_141"><p>Permet d'importer des modules ES6 plus facilement.</p></td></tr></tbody></table></div><aside class="prompt" data-type="tip" data-title="" id="-b3r0i3_107"><p id="-b3r0i3_143"><code class="code" id="-b3r0i3_144">include</code> d&eacute;termine quels fichiers doivent &ecirc;tre transpil&eacute;s au sein de <code class="code" id="-b3r0i3_145">rootDir</code>. Dans notre exemple, il est possible d'omettre cette inclusion puisqu'elle porte sur l'ensemble des fichiers de <code class="code" id="-b3r0i3_146">rootDir</code>.</p></aside></section></section><section class="chapter"><h3 id="ex-cuter-des-fichiers-typescript-directement-avec-nodejs" data-toc="ex-cuter-des-fichiers-typescript-directement-avec-nodejs">Ex&eacute;cuter des fichiers <code class="code" id="-b3r0i3_150">TypeScript</code> directement avec <code class="code" id="-b3r0i3_151">Nodejs</code></h3><div class="code-block" data-lang="bash">
+npm install -g ts-node
+</div><div class="code-block" data-lang="bash">
+ts-node fichier.ts
+</div></section></section><section class="chapter"><h2 id="avantages-de-typescript" data-toc="avantages-de-typescript">Avantages de TypeScript</h2><ul class="list _bullet" id="-b3r0i3_152"><li class="list__item" id="-b3r0i3_153"><p><span class="control" id="-b3r0i3_158">Typage statique</span>: Contrairement &agrave; JavaScript (typ&eacute; dynamiquement), TypeScript permet de d&eacute;finir des types pour les variables, fonctions et objets.</p></li><li class="list__item" id="-b3r0i3_154"><p><span class="control" id="-b3r0i3_159">Meilleure maintenabilit&eacute;</span>: Les erreurs sont d&eacute;tect&eacute;es avant l'ex&eacute;cution, &eacute;vitant ainsi les bugs en production.</p></li><li class="list__item" id="-b3r0i3_155"><p><span class="control" id="-b3r0i3_160">Autocompl&eacute;tion et documentation am&eacute;lior&eacute;e</span>: Avec un IDE comme VS Code, TypeScript propose de meilleures suggestions et une documentation automatique.</p></li><li class="list__item" id="-b3r0i3_156"><p><span class="control" id="-b3r0i3_161">Compatibilit&eacute; avec JavaScript</span>: Tout code JavaScript est valide en TypeScript (mais l'inverse n&rsquo;est pas toujours vrai).</p></li><li class="list__item" id="-b3r0i3_157"><p><span class="control" id="-b3r0i3_162">Support des derni&egrave;res fonctionnalit&eacute;s ECMAScript</span>: TypeScript permet d'utiliser des fonctionnalit&eacute;s modernes avant qu'elles ne soient prises en charge par tous les navigateurs.</p></li></ul></section><div class="last-modified">Last modified: 25 février 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="001-00-introduction.html" class="navigation-links__prev">Introduction</a><a href="003-00-les-contrôleurs.html" class="navigation-links__next">Les contr&ocirc;leurs</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.10.0-b575/app.js"></script></body></html>
