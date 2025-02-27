@@ -232,3 +232,139 @@ export class PersonService {
   }
 }
 ```
+
+## Les champs virtuels
+
+Les champs virtuels sont des informations calculées à partir des données du schéma.
+
+```typescript
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
+
+// Les options toJSON et toObject intégrerons les valeurs calculées
+// dans la réponse des requêtes
+@Schema({ toJSON: { virtuals: true }, toObject: { virtuals: true } }) 
+export class User extends Document {
+  @Prop()
+  firstName: string;
+
+  @Prop()
+  lastName: string;
+}
+
+const UserSchema = SchemaFactory.createForClass(User);
+
+// Concaténation du nom et du prénom dans un champ fullName
+UserSchema.virtual('fullName').get(function () {
+  return `${this.firstName} ${this.lastName}`;
+});
+
+export { UserSchema };
+```
+
+### Quelques cas d'utilisation
+
+#### Masquer des informations sensibles
+
+```typescript
+// Champ virtuel pour masquer le début d'un numéro de CB
+// Le champ creditCardNumber sera éliminé de la réponse
+// Il sera cependant possible d'interroger cette information dans notre code
+UserSchema.virtual('secureCreditCard').get(function () {
+  return this.creditCardNumber.replace(/\d{12}(\d{4})/, '**** **** **** $1');
+});
+```
+
+> Note : Il serait sans doute plus raisonnable de crypter ce genre d'information sensible dans la base de données
+
+#### Calcul de l'âge
+
+```typescript
+UserSchema.virtual('age').get(function () {
+  const today = new Date();
+  const birthDate = new Date(this.dateOfBirth);
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const monthDiff = today.getMonth() - birthDate.getMonth();
+  if (
+    monthDiff < 0 || 
+    (monthDiff === 0 && today.getDate() < birthDate.getDate())
+  ) {
+    age--;
+  }
+  return age;
+});
+```
+
+### Exercices
+
+- Un prix stocké en centimes, qui doit être retourné en euros
+- Un champ booléen `IsActive` qui découle d'une date d'expiration
+
+## Les hooks
+
+Les hooks Mongoose (ou middleware) sont des fonctions qui s’exécutent automatiquement à différents moments du cycle de vie d'un document, d'une requête ou d'un agrégat. Ils permettent d'ajouter des logiques avant ou après certaines actions, comme la validation, la sauvegarde ou la suppression d’un document.
+
+Un hook est composé de deux parties :
+
+- temporelle : `pre` ou `post`
+- événementielle : una action sur la base de données comme `save` ou `find`
+
+### Les événements 
+
+| Type de Hook  | Événement | Description |
+|--------------|-----------|-------------|
+| **Document** | `init` | Avant qu'un document soit instancié à partir de la base de données. |
+| **Document** | `validate` | Avant que la validation d’un document soit effectuée. |
+| **Document** | `save` | Avant ou après l'enregistrement d'un document (`pre` ou `post`). |
+| **Document** | `remove` | Avant ou après la suppression d’un document. |
+| **Document** | `updateOne` | Avant ou après la mise à jour d’un document unique. |
+| **Query** | `find` | Avant ou après une requête `find()`. |
+| **Query** | `findOne` | Avant ou après une requête `findOne()`. |
+| **Query** | `findOneAndUpdate` | Avant ou après `findOneAndUpdate()`. |
+| **Query** | `deleteOne` | Avant ou après `deleteOne()`. |
+| **Query** | `deleteMany` | Avant ou après `deleteMany()`. |
+| **Model** | `insertMany` | Avant ou après `insertMany()`. |
+| **Aggregate** | `aggregate` | Avant ou après l'exécution d'un pipeline d'agrégation. |
+
+### Exemples de hooks
+
+#### Ajout d'un horodatage de modification
+
+```typescript
+userSchema.pre('updateOne', function (next) {
+  this.set({ updatedAt: new Date() });
+  next();
+});
+```
+
+#### Hachage d'un mot de passe
+
+```typescript
+import * as bcrypt from 'bcrypt';
+
+userSchema.pre('save', async function (next) {
+  if (this.isModified('password')) {
+    this.password = await bcrypt.hash(this.password, 10);
+  }
+  next();
+});
+```
+
+#### Insertion d'un filtre automatique
+
+```typescript
+userSchema.pre('find', function (next) {
+  this.where({ isActive: true });
+  next();
+});
+```
+
+### Quelques observations
+
+- Ne pas oublier d'exécuter la fonction `next` pour passer la main au prochain middleware.
+- `this` fait ici référence au modèle et permet d'accèder aux informations.
+- Ne pas utiliser les `arrow functions`, le contexte serait global et `this` ne permettrait plus d'accéder au modèle.
+
+## Les agrégations
+
+Ici Mongoose n'apporte rien de plus que MongoDB qui propose déjà un framework d'agrégation très complet. La méthode `aggregate` du modèle Mongoose est donc totalement identique à cette dernière.
