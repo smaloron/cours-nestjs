@@ -1,0 +1,269 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#307FFF"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2025-02-27T07:16:03.123803"><title>Les contr&ocirc;leurs | nestjs</title><script type="application/json" id="virtual-toc-data">[{"id":"cr-er-un-contr-leur","level":0,"title":"Créer un contrôleur","anchor":"#cr-er-un-contr-leur"},{"id":"ajout-de-m-thodes-au-contr-leur","level":0,"title":"Ajout de méthodes au contrôleur","anchor":"#ajout-de-m-thodes-au-contr-leur"},{"id":"tester-une-route","level":0,"title":"Tester une route","anchor":"#tester-une-route"},{"id":"exercice","level":0,"title":"Exercice","anchor":"#exercice"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.10.0-b575/app.css" rel="stylesheet"><meta name="msapplication-TileColor" content="#000000"><link rel="apple-touch-icon" sizes="180x180" href="https://jetbrains.com/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://jetbrains.com/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://jetbrains.com/favicon-16x16.png"><meta name="msapplication-TileImage" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-144x144.png"><meta name="msapplication-square70x70logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-70x70.png"><meta name="msapplication-square150x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x150.png"><meta name="msapplication-square310x310logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x310.png"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Les contr&ocirc;leurs | nestjs"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="nestjs Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/003-00-les-controleurs.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="Les contr&ocirc;leurs | nestjs"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/003-00-les-controleurs.html#webpage",
+    "url": "writerside-documentation/003-00-les-controleurs.html",
+    "name": "Les contr&ocirc;leurs | nestjs",
+    "description": "",
+    "image": "",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "nestjs Help"
+}</script><!-- End Schema.org --></head><body data-id="003-00-Les-controleurs" data-main-title="Les contrôleurs" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs=""><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>nestjs  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="003-00-Les-controleurs" id="003-00-Les-controleurs.md">Les contrôleurs</h1><section class="chapter"><h2 id="cr-er-un-contr-leur" data-toc="cr-er-un-contr-leur">Cr&eacute;er un contr&ocirc;leur</h2><p id="mdmw41_7">NestJS dispose d'une commande <code class="code" id="mdmw41_11">generate</code> charg&eacute;e d'&eacute;crire du code pour nous.</p><section class="chapter"><h3 id="dans-le-module-principal" data-toc="dans-le-module-principal">Dans le module principal</h3><div class="code-block" data-lang="bash">
+nest generate controller &lt;nom du contrôleur&gt;
+</div><p id="mdmw41_13">ou la version courte</p><div class="code-block" data-lang="bash">
+nest g co &lt;nom du contrôleur&gt;
+</div><p id="mdmw41_15">Cette commande effectue les actions suivantes :</p><ul class="list _bullet" id="mdmw41_16"><li class="list__item" id="mdmw41_20"><p>Cr&eacute;&eacute; un dossier <code class="code" id="mdmw41_25">persons</code>.</p></li><li class="list__item" id="mdmw41_21"><p>Cr&eacute;&eacute; un fichier <code class="code" id="mdmw41_26">persons.controller.ts</code> dans le dossier <code class="code" id="mdmw41_27">controllers</code>.</p></li><li class="list__item" id="mdmw41_22"><p>Cr&eacute;&eacute; un fichier <code class="code" id="mdmw41_28">persons.controller.spec.ts</code> dans le dossier <code class="code" id="mdmw41_29">controllers</code>.</p></li><li class="list__item" id="mdmw41_23"><p>Modifie <code class="code" id="mdmw41_30">app.module.ts</code> et ajoute un import vers le nouveau contr&ocirc;leur.</p></li><li class="list__item" id="mdmw41_24"><p>Modifie <code class="code" id="mdmw41_31">app.module.ts</code> et r&eacute;f&eacute;rence le nouveau contr&ocirc;leur dans le tableau <code class="code" id="mdmw41_32">controllers</code> du d&eacute;corateur <code class="code" id="mdmw41_33">@Module</code>.</p></li></ul><aside class="prompt" data-type="tip" data-title="" id="mdmw41_17"><p id="mdmw41_34">Le suffixe <code class="code" id="mdmw41_36">Controller</code> est ajout&eacute; automatiquement. Si nous entrons la commande suivante <code class="code" id="mdmw41_37">nest g co persons-controller</code> nous obtiendrons donc une classe <code class="code" id="mdmw41_38">PersonControllerController</code>.</p><p id="mdmw41_35">Notons &eacute;galement que par convention le nom du fichier est au pluriel et en kebab-case (tiret du 6) alors que le nom de la classe est pass&eacute; au singulier et en camelCase.</p></aside><p id="mdmw41_18">Si nous ne souhaitons pas ranger les contr&ocirc;leur dans un dossier <code class="code" id="mdmw41_39">controllers</code>, il nous faudra ajouter l'option <code class="code" id="mdmw41_40">--flat</code> &agrave; la commande.</p><div class="code-block" data-lang="bash">
+nest g co &lt;nom du contrôleur&gt; --flat
+</div></section><section class="chapter"><h3 id="dans-un-autre-module" data-toc="dans-un-autre-module">Dans un autre module</h3><p id="mdmw41_41">Pour cr&eacute;er un contr&ocirc;leur dans un autre module, c'est tr&egrave;s simple. Il nous suffit d'indiquer le dossier dans lequel nous souhaitons ajouter le nouveau contr&ocirc;leur.</p><ul class="list _bullet" id="mdmw41_42"><li class="list__item" id="mdmw41_47"><p>Si le module existe, le contr&ocirc;leur sera ajout&eacute; et r&eacute;f&eacute;renc&eacute; dans ce module.</p></li><li class="list__item" id="mdmw41_48"><p>S'il n'existe pas, un nouveau module sera automatiquement cr&eacute;&eacute;.</p></li></ul><p id="mdmw41_43">Exemple, cr&eacute;ation d'un contr&ocirc;leur <code class="code" id="mdmw41_49">UserController</code> dans un module <code class="code" id="mdmw41_50">UserModule</code>.</p><div class="code-block" data-lang="bash">
+nest g co users/users 
+</div><p id="mdmw41_45">Ajout d'un autre contr&ocirc;leur &agrave; ce module.</p><div class="code-block" data-lang="bash">
+nest g co users/users-settings 
+</div></section><section class="chapter"><h3 id="anatomie-du-contr-leur" data-toc="anatomie-du-contr-leur">Anatomie du contr&ocirc;leur</h3><div class="code-block" data-lang="ts">
+import { Controller } from '@nestjs/common';
+
+// déclare un contrôleur qui réagit à la route /person
+@Controller('person')
+export class PersonController {}
+</div></section></section><section class="chapter"><h2 id="ajout-de-m-thodes-au-contr-leur" data-toc="ajout-de-m-thodes-au-contr-leur">Ajout de m&eacute;thodes au contr&ocirc;leur</h2><p id="mdmw41_52">Pour que le contr&ocirc;leur puisse intercepter des requ&ecirc;tes, il lui faut des m&eacute;thodes d&eacute;cor&eacute;es par des fonctions indiquant le verbe http auquel elles doivent r&eacute;agir.</p><section class="chapter"><h3 id="d-corateur-get" data-toc="d-corateur-get">D&eacute;corateur <code class="code" id="mdmw41_69">@Get</code></h3><div class="code-block" data-lang="ts">
+import { Controller, Get } from '@nestjs/common';
+
+@Controller('person')
+export class PersonController {
+  
+  @Get()
+  getAll() {
+    return 'Liste de toutes les personnes';
+  }
+}
+</div><p id="mdmw41_64">Si ce n'est d&eacute;j&agrave; fait, lancer le serveur avec <code class="code" id="mdmw41_70">npm run start:dev</code> et tester la route.</p><p id="mdmw41_65"><a href="http://localhost:3000/person" id="mdmw41_71" data-external="true" rel="noopener noreferrer"><code class="code" id="mdmw41_72">http://localhost:3000/person</code></a></p><p id="mdmw41_66">Il est possible de passer un argument &agrave; @Get pour ajouter un compl&eacute;ment &agrave; la route.</p><div class="code-block" data-lang="ts">
+import { Controller, Get } from '@nestjs/common';
+
+@Controller('person')
+export class PersonController {
+  
+  // La route est désormais /person/all
+  @Get('all')
+  getAll() {
+    return 'Liste de toutes les personnes';
+  }
+}
+</div><p id="mdmw41_68"><a href="http://localhost:3000/person/all" id="mdmw41_73" data-external="true" rel="noopener noreferrer"><code class="code" id="mdmw41_74">http://localhost:3000/person/all</code></a></p></section><section class="chapter"><h3 id="ajout-d-un-param-tre" data-toc="ajout-d-un-param-tre">Ajout d'un param&egrave;tre</h3><p id="mdmw41_75">Ajoutons une autre route pour obtenir une seule personne. Pour cela, nous aurons besoins de transmettre l'identifiant de cette personne.</p><div class="code-block" data-lang="ts">
+  @Get(':id')
+  getOne(@Param('id') identifiant: number) {
+    return `Une personne dont l'id est ${identifient}`;
+  }
+</div><ul class="list _bullet" id="mdmw41_77"><li class="list__item" id="mdmw41_80"><p>Le param&egrave;tre est d&eacute;clar&eacute; dans le d&eacute;corateur <code class="code" id="mdmw41_84">@Get</code>, les <code class="code" id="mdmw41_85">:</code> indiquent qu'il s'agit d'un param&egrave;tre et non d'un simple compl&eacute;ment de route.</p></li><li class="list__item" id="mdmw41_81"><p>La m&eacute;thode re&ccedil;oit un argument, son nom est libre.</p></li><li class="list__item" id="mdmw41_82"><p>L'argument est d&eacute;cor&eacute; par @Param qui permet de lier la variable au param&egrave;tre.</p></li><li class="list__item" id="mdmw41_83"><p>Ne pas oublier d'importer <code class="code" id="mdmw41_86">Param</code> si cela n'a pas &eacute;t&eacute; fait automatiquement.</p></li></ul><p id="mdmw41_78"><span class="control" id="mdmw41_87">Test</span></p><p id="mdmw41_79"><a href="http://localhost:3000/person/1" id="mdmw41_88" data-external="true" rel="noopener noreferrer"><code class="code" id="mdmw41_89">http://localhost:3000/person/1</code></a></p></section><section class="chapter"><h3 id="retour-json" data-toc="retour-json">Retour json</h3><p id="mdmw41_90">Pour retourner un contenu <code class="code" id="mdmw41_92">JSON</code>, il suffit de renvoyer un objet litt&eacute;ral.</p><div class="code-block" data-lang="ts">
+  @Get(':id')
+  getOne(@Param('id') identifiant: number) {
+    return {
+        id: identifiant, 
+        action: 'Affichage d'une personne'
+    };
+  }
+</div></section><section class="chapter"><h3 id="eviter-le-masquage-des-routes" data-toc="eviter-le-masquage-des-routes">Eviter le masquage des routes</h3><p id="mdmw41_93">Par d&eacute;faut le param&egrave;tre capture tout type de caract&egrave;res. Dans notre exemple <code class="code" id="mdmw41_97">@Get(':id')</code> correspondra donc, entre autres, aux routes suivantes :</p><ul class="list _bullet" id="mdmw41_94"><li class="list__item" id="mdmw41_98"><p>/person/1</p></li><li class="list__item" id="mdmw41_99"><p>/person/search</p></li></ul><p id="mdmw41_95">Il serait judicieux de limiter ce param&egrave;tre <code class="code" id="mdmw41_100">id</code> aux seuls caract&egrave;res num&eacute;riques afin de ne pas masquer d'autres routes &eacute;ventuelles.</p><p id="mdmw41_96">La pr&eacute;c&eacute;dente version d'Express (un framework sur lequel Nestjs s'appuie) le permettait, ce n'est h&eacute;las plus le cas. Il faut d&eacute;sormais prendre garde &agrave; l'ordre des routes et placer celles qui utilise un param&egrave;tre apr&eacute;s celles qui n'en ont pas.</p></section><section class="chapter"><h3 id="gestion-du-querystring" data-toc="gestion-du-querystring">Gestion du QueryString</h3><p id="mdmw41_101">Outre les param&egrave;tres, il est possible de passer des informations &agrave; une route par le biais du <code class="code" id="mdmw41_107">QueryString</code>. Il s'agit de donn&eacute;es facultatives qui sont int&eacute;gr&eacute;es dans la requ&ecirc;te http apr&egrave;s la ressource.</p><ul class="list _bullet" id="mdmw41_102"><li class="list__item" id="mdmw41_108"><p>Le <code class="code" id="mdmw41_111">querystring commence par un</code> ?` apr&egrave;s la ressource.</p></li><li class="list__item" id="mdmw41_109"><p>Les donn&eacute;es sont pass&eacute;es sous le forme <code class="code" id="mdmw41_112">clef=valeur</code>.</p></li><li class="list__item" id="mdmw41_110"><p>Les diff&eacute;rentes paires clefs-valeurs sont s&eacute;par&eacute;es par un <code class="code" id="mdmw41_113">&amp;</code>.</p></li></ul><p id="mdmw41_103">Quelques exemples</p><p id="mdmw41_104"><code class="code" id="mdmw41_114">http://localhost:3000/person?page=2</code></p><p id="mdmw41_105"><code class="code" id="mdmw41_115">http://localhost:3000/person/search?firstName=Ada&amp;lastName=Lovelace</code></p><div class="code-block" data-lang="ts">
+import { Controller, Get, Param, Query } from '@nestjs/common';
+
+@Controller('person')
+export class PersonController {
+
+  @Get()
+  getAll(@Query('page')page:number = 1) {
+    return `Liste de toutes les personnes page ${page}`;
+  }
+
+  @Get(':id')
+  getOne(@Param('id') id: string) {
+    return `Une personne dont l'id est ${id}`;
+  }
+
+  @Get('search')
+  search(
+    // récupération du paramètre &quot;term&quot; 
+    // dans le querystring
+    @Query('term') term: string),
+    // récupération du paramètre &quot;page&quot; 
+    // avec une valeur par défaut
+    @Query('page') page:number = 1
+  )
+  {
+    return `recherche sur ${term}`;
+  }
+}
+</div></section><section class="chapter"><h3 id="d-corateur-post" data-toc="d-corateur-post">D&eacute;corateur <code class="code" id="mdmw41_120">@Post</code></h3><p id="mdmw41_117">Les donn&eacute;es envoy&eacute;es avec le verbe <code class="code" id="mdmw41_121">POST</code> r&eacute;sident dans le corps de la requ&ecirc;te. Il faudra donc utiliser un nouveau d&eacute;corateur <code class="code" id="mdmw41_122">@Body</code> pour les r&eacute;cup&eacute;rer.</p><p id="mdmw41_118">Il faudra encore une fois prendre garde aux imports.</p><div class="code-block" data-lang="ts">
+  @Post()
+  insert(@Body() person: {id: number, name: string}) 
+  {
+    return `Nouvelle personne 
+            dont le nom est ${person.name}
+            et l'id est ${person.id}`;
+  }
+</div></section><section class="chapter"><h3 id="d-corateurs-put-et-patch" data-toc="d-corateurs-put-et-patch">D&eacute;corateurs <code class="code" id="mdmw41_127">@Put</code> et <code class="code" id="mdmw41_128">@Patch</code></h3><p id="mdmw41_124">La difference entre ces deux d&eacute;corateurs est s&eacute;mantique, le verbe http <code class="code" id="mdmw41_129">PUT</code> est cens&eacute; remplacer l'int&eacute;gralit&eacute; du contenu (hormis l'id), tandis que le verbe <code class="code" id="mdmw41_130">PATCH</code> doit permettre une mise &agrave; jour partielle.</p><p id="mdmw41_125">Ces deux m&eacute;thodes ressemblent beaucoup &agrave; l'insertion, la diff&eacute;rence ici r&eacute;side dans le param&egrave;tre <code class="code" id="mdmw41_131">id</code> qui d&eacute;finit la personne &agrave; modifier.</p><div class="code-block" data-lang="ts">
+  @Put(':id')
+  replace(
+    @Param('id') id: number,
+    @Body() person: {name: string}
+  )
+  {
+    return `Modification d'une personne 
+            le nouveau nom est ${person.name}
+            et l'id est ${id}`;
+  }
+  
+  @Patch(':id')
+  update(
+    @Param('id') id: number,
+    @Body() person: {name: string}
+  )
+  {
+    return `Modification d'une personne 
+            le nouveau nom est ${person.name}
+            et l'id est ${id}`;
+  }
+
+</div></section><section class="chapter"><h3 id="d-corateur-delete" data-toc="d-corateur-delete">D&eacute;corateur <code class="code" id="mdmw41_135">@Delete</code></h3><p id="mdmw41_133">Enfin le d&eacute;corateur <code class="code" id="mdmw41_136">@Delete</code> est utilis&eacute; pour la suppression.</p><div class="code-block" data-lang="ts">
+  @Delete(':id')
+  delete(@Param('id') id: number)
+  {
+    return `Suppression d'une personne 
+            dont l'id est ${id}`;
+  }
+</div></section><section class="chapter"><h3 id="gestion-des-en-t-tes-http" data-toc="gestion-des-en-t-tes-http">Gestion des en-t&ecirc;tes http</h3><p id="mdmw41_137">Pour lire les en-t&ecirc;tes http, nous utiliserons le d&eacute;corateur <code class="code" id="mdmw41_140">@Headers</code>.</p><div class="code-block" data-lang="ts">
+  @Get('with-token')
+  withToken(
+      // récupération d'un en-tête spécifique
+      @Headers('x-token') token:string
+  ): string
+  {
+    return `token = ${token}`;
+  }
+
+  @Get('with-all-headers')
+  withAllHeaders(
+    // récupération de tous les en-têtes
+    // Record est un objet TypeScript qui se comporte
+    // comme un Map Java (tableau associatif)
+    @Headers() headers: Record&lt;string, string&gt;
+  ): string
+  {
+    return headers.toString();
+  }
+</div><section class="chapter"><h4 id="quelques-en-t-tes-fr-quents" data-toc="quelques-en-t-tes-fr-quents">Quelques en-t&ecirc;tes fr&eacute;quents</h4><div class="table-wrapper"><table class="wide" id="mdmw41_141"><thead><tr class="ijRowHead" id="mdmw41_142"><th id="mdmw41_152"><p>En-t&ecirc;te</p></th><th id="mdmw41_153"><p>Description</p></th><th id="mdmw41_154"><p>Exemple</p></th></tr></thead><tbody><tr id="mdmw41_143"><td id="mdmw41_155"><p>Authorization</p></td><td id="mdmw41_156"><p>Jeton d'authentification</p></td><td id="mdmw41_157"><p>Authorization: Bearer eyJhbG...</p></td></tr><tr id="mdmw41_144"><td id="mdmw41_158"><p>X-Token</p></td><td id="mdmw41_159"><p>Jeton d'authentification (alternative)</p></td><td id="mdmw41_160"><p>X-Token: my-secret-token</p></td></tr><tr id="mdmw41_145"><td id="mdmw41_161"><p>X-API-Key</p></td><td id="mdmw41_162"><p>Cl&eacute; utilis&eacute;e pour l'acc&egrave;s &agrave; certaines API</p></td><td id="mdmw41_163"><p>X-API-Key: 123456</p></td></tr><tr id="mdmw41_146"><td id="mdmw41_164"><p>Access-Control-Allow-Origin</p></td><td id="mdmw41_165"><p>Autorise des domaines sp&eacute;cifiques &agrave; acc&eacute;der &agrave; l'API</p></td><td id="mdmw41_166"><p>Access-Control-Allow-Origin: *</p></td></tr><tr id="mdmw41_147"><td id="mdmw41_167"><p>Access-Control-Allow-Methods</p></td><td id="mdmw41_168"><p>Sp&eacute;cifie les m&eacute;thodes HTTP autoris&eacute;es</p></td><td id="mdmw41_169"><p>Access-Control-Allow-Methods: GET, POST</p></td></tr><tr id="mdmw41_148"><td id="mdmw41_170"><p>Access-Control-Allow-Headers</p></td><td id="mdmw41_171"><p>Sp&eacute;cifie les en-t&ecirc;tes HTTP autoris&eacute;s</p></td><td id="mdmw41_172"><p>Access-Control-Allow-Headers: Authorization, Content-Type</p></td></tr><tr id="mdmw41_149"><td id="mdmw41_173"><p>Content-Type</p></td><td id="mdmw41_174"><p>Indique le format des donn&eacute;es envoy&eacute;es dans la requ&ecirc;te</p></td><td id="mdmw41_175"><p>Content-Type: application/json</p></td></tr><tr id="mdmw41_150"><td id="mdmw41_176"><p>Accept</p></td><td id="mdmw41_177"><p>Sp&eacute;cifie le format attendu dans la r&eacute;ponse</p></td><td id="mdmw41_178"><p>Accept: application/json</p></td></tr><tr id="mdmw41_151"><td id="mdmw41_179"><p>X-Frame-Options</p></td><td id="mdmw41_180"><p>Emp&ecirc;che l&rsquo;int&eacute;gration dans une iframe (protection contre les attaques clickjacking).</p></td><td id="mdmw41_181"><p>X-Frame-Options: DENY</p></td></tr></tbody></table></div></section></section></section><section class="chapter"><h2 id="tester-une-route" data-toc="tester-une-route">Tester une route</h2><p id="mdmw41_182">Pour les routes utilisant le verbe http GET, un navigateur fait l'affaire. Pour les autres types de routes il faut utiliser un outil pour envoyer des requ&ecirc;tes.</p><section class="chapter"><h3 id="curl" data-toc="curl">CURL</h3><p id="mdmw41_188">CURL est un outil en ligne de commande qui permet d'envoyer des requ&ecirc;tes depuis un terminal.</p><section class="chapter"><h4 id="envoi-d-une-requ-te-get" data-toc="envoi-d-une-requ-te-get">Envoi d'une requ&ecirc;te GET</h4><div class="code-block" data-lang="bash">
+curl -X GET http://localhost:3000/person
+</div></section><section class="chapter"><h4 id="enregistrement-du-r-sultat-dans-un-fichier" data-toc="enregistrement-du-r-sultat-dans-un-fichier">Enregistrement du r&eacute;sultat dans un fichier</h4><div class="code-block" data-lang="bash">
+curl -o response.json -X GET http://localhost:3000/person
+</div><p id="mdmw41_195">ou</p><div class="code-block" data-lang="bash">
+curl -X GET http://localhost:3000/person &gt; response.json
+</div></section><section class="chapter"><h4 id="envoi-d-une-requ-te-avec-transmission-de-donn-es" data-toc="envoi-d-une-requ-te-avec-transmission-de-donn-es">Envoi d'une requ&ecirc;te avec transmission de donn&eacute;es</h4><div class="code-block" data-lang="bash">
+curl -X POST http://localhost:3000/person \
+     -H &quot;Content-Type: application/json&quot; \
+     -d '{&quot;id&quot;: 1, &quot;name&quot;: &quot;Saoirse&quot;}' 
+</div><ul class="list _bullet" id="mdmw41_198"><li class="list__item" id="mdmw41_200"><p><code class="code" id="mdmw41_202">-H</code>, ajoute un en-t&ecirc;te http.</p></li><li class="list__item" id="mdmw41_201"><p><code class="code" id="mdmw41_203">-d</code>, d&eacute;finit les donn&eacute;es (data) transmises dans le corps de la requ&ecirc;te.</p></li></ul><p id="mdmw41_199">La transmission de donn&eacute;es est utilis&eacute;e avec les verbes <code class="code" id="mdmw41_204">POST</code>, <code class="code" id="mdmw41_205">PUT</code>et <code class="code" id="mdmw41_206">PATCH</code>.</p></section><section class="chapter"><h4 id="envoi-d-une-requ-te-avec-authentification" data-toc="envoi-d-une-requ-te-avec-authentification">Envoi d'une requ&ecirc;te avec authentification</h4><div class="code-block" data-lang="bash">
+curl -X GET http://localhost:3000/person \
+     -H &quot;Authorization: Bearer &lt;TOKEN&gt;&quot; \
+     -H &quot;Accept: application/json&quot;
+</div></section></section><section class="chapter"><h3 id="postman" data-toc="postman">Postman</h3><p id="mdmw41_208">Pour une exp&eacute;rience plus graphique, nous pouvons utiliser <code class="code" id="mdmw41_212">Postman</code> t&eacute;l&eacute;chargeable &agrave; l'adresse suivante :</p><p id="mdmw41_209"><a href="https://www.postman.com/downloads/" id="mdmw41_213" data-external="true" rel="noopener noreferrer">T&eacute;l&eacute;chager Postma</a></p><p id="mdmw41_210">Il existe &eacute;galement une version en ligne sans installation</p><figure id="mdmw41_211"><img alt="CleanShot 2025-02-15 at 16.14.02@2x.png" src="images/CleanShot%202025-02-15%20at%2016.14.02%402x.png" title="CleanShot 2025-02-15 at 16.14.02@2x.png" width="2624" height="2260"></figure></section><section class="chapter"><h3 id="plugin-pour-visual-studio-code" data-toc="plugin-pour-visual-studio-code">Plugin pour Visual Studio Code</h3><p id="mdmw41_214">L'outil le plus populaire est l'extension <code class="code" id="mdmw41_217">Thunder Client</code>.</p><figure id="mdmw41_215"><img alt="CleanShot 2025-02-15 at 16.14.52@2x.png" src="images/CleanShot%202025-02-15%20at%2016.14.52%402x.png" title="CleanShot 2025-02-15 at 16.14.52@2x.png" width="810" height="876"></figure><figure id="mdmw41_216"><img alt="CleanShot 2025-02-15 at 16.16.40@2x.png" src="images/CleanShot%202025-02-15%20at%2016.16.40%402x.png" title="CleanShot 2025-02-15 at 16.16.40@2x.png" width="2332" height="1548"></figure></section><section class="chapter"><h3 id="webstorm-http-client" data-toc="webstorm-http-client">WebStorm HTTP Client</h3><p id="mdmw41_218">Menu : <code class="code" id="mdmw41_220">Tools &gt; HTTP Client</code></p><figure id="mdmw41_219"><img alt="CleanShot 2025-02-15 at 16.18.49@2x.png" src="images/CleanShot%202025-02-15%20at%2016.18.49%402x.png" title="CleanShot 2025-02-15 at 16.18.49@2x.png" width="1650" height="984"></figure></section><section class="chapter"><h3 id="test-des-routes-avec-webstorm" data-toc="test-des-routes-avec-webstorm">Test des routes avec WebStorm</h3><p id="mdmw41_221"><span class="control" id="mdmw41_223">Enregister dans <code class="code" id="mdmw41_224">http-client/test-person.http</code></span>.</p><div class="code-block" data-lang="http">
+### Test de la récupération de toutes les personnes
+
+GET http://localhost:3000/person
+Accept: application/json
+Content-Type: application/json
+
+
+### Test de la récupération d'une personne
+
+GET http://localhost:3000/person/1
+Accept: application/json
+
+
+### Test de la récupération d'une personne inexistante
+
+GET http://localhost:3000/person/10000
+Accept: application/json
+
+
+### Test de la création d'une personne
+
+POST http://localhost:3000/person/
+Accept: application/json
+Content-Type: application/json
+
+{
+  &quot;firstName&quot;: &quot;Melanie&quot;,
+  &quot;lastName&quot;: &quot;Rawn&quot;,
+  &quot;age&quot;: 50,
+  &quot;email&quot;: &quot;melanie.rawn@gmail.com&quot;
+}
+
+
+### Test du remplacement d'une personne
+
+PUT http://localhost:3000/person/2
+Accept: application/json
+Content-Type: application/json
+
+{
+&quot;firstName&quot;: &quot;Annie&quot;,
+&quot;lastName&quot;: &quot;Leibovitz&quot;,
+&quot;age&quot;: 54,
+&quot;email&quot;: &quot;a.leibovitz@gmail.com&quot;
+}
+
+
+### Test du remplacement d'une personne inexistante
+
+PUT http://localhost:3000/person/10000
+Accept: application/json
+Content-Type: application/json
+
+{
+  &quot;firstName&quot;: &quot;Annie&quot;,
+  &quot;lastName&quot;: &quot;Leibovitz&quot;,
+  &quot;age&quot;: 54,
+  &quot;email&quot;: &quot;a.leibovitz@gmail.com&quot;
+}
+
+
+### Test de la modification d'une personne
+
+PATCH http://localhost:3000/person/2
+Accept: application/json
+Content-Type: application/json
+
+{
+  &quot;firstName&quot;: &quot;Tal&quot;
+}
+
+
+### Test de la modification d'une personne inexistante
+
+PATCH http://localhost:3000/person/10000
+Accept: application/json
+Content-Type: application/json
+
+{
+  &quot;firstName&quot;: &quot;Tal&quot;
+}
+
+
+### Test de la suppression d'une personne
+
+DELETE http://localhost:3000/person/2
+Accept: application/json
+
+
+### Test de la suppression d'une personne inexistante
+
+DELETE http://localhost:3000/person/10000
+Accept: application/json
+
+</div></section></section><section class="chapter"><h2 id="exercice" data-toc="exercice">Exercice</h2><p id="mdmw41_225">Cr&eacute;er un contr&ocirc;leur <code class="code" id="mdmw41_229">BookController</code> dans un module <code class="code" id="mdmw41_230">BookModule</code>.</p><p id="mdmw41_226">Le retour des routes sera un objet contenant le message et les &eacute;ventuelles donn&eacute;es envoy&eacute;es.</p><div class="code-block" data-lang="javascript">
+{
+    message: 'le message'
+    data: {}
+}
+</div><section class="chapter"><h3 id="cr-er-les-routes-suivantes" data-toc="cr-er-les-routes-suivantes">Cr&eacute;er les routes suivantes :</h3><div class="table-wrapper"><table class="wide" id="mdmw41_231"><thead><tr class="ijRowHead" id="mdmw41_233"><th id="mdmw41_241"><p>m&eacute;thode</p></th><th id="mdmw41_242"><p>route</p></th><th id="mdmw41_243"><p>message</p></th></tr></thead><tbody><tr id="mdmw41_234"><td id="mdmw41_244"><p>GET</p></td><td id="mdmw41_245"><p>/book</p></td><td id="mdmw41_246"><p>Liste des livres</p></td></tr><tr id="mdmw41_235"><td id="mdmw41_247"><p>GET</p></td><td id="mdmw41_248"><p>/book/:id</p></td><td id="mdmw41_249"><p>Affichage du livre id</p></td></tr><tr id="mdmw41_236"><td id="mdmw41_250"><p>GET</p></td><td id="mdmw41_251"><p>/book/search</p></td><td id="mdmw41_252"><p>Recherche des livre, </p><br><p> afficher les donn&eacute;es du querystring</p></td></tr><tr id="mdmw41_237"><td id="mdmw41_254"><p>POST</p></td><td id="mdmw41_255"><p>/book</p></td><td id="mdmw41_256"><p>Nouveau livre (afficher les donn&eacute;es post&eacute;es)</p></td></tr><tr id="mdmw41_238"><td id="mdmw41_257"><p>PUT</p></td><td id="mdmw41_258"><p>/book/:id</p></td><td id="mdmw41_259"><p>Remplacement d'un livre (afficher les donn&eacute;es post&eacute;es)</p></td></tr><tr id="mdmw41_239"><td id="mdmw41_260"><p>PATCH</p></td><td id="mdmw41_261"><p>/book/:id</p></td><td id="mdmw41_262"><p>Modification d'un livre (afficher les donn&eacute;es post&eacute;es)</p></td></tr><tr id="mdmw41_240"><td id="mdmw41_263"><p>DELETE</p></td><td id="mdmw41_264"><p>/book/:id</p></td><td id="mdmw41_265"><p>Suppression d'un livre (afficher l'id)</p></td></tr></tbody></table></div><p id="mdmw41_232"><span class="control" id="mdmw41_266">Tester avec un client tel que Postman, Thunder (Vs Code) ou le client http de WebStorm.</span></p></section></section><div class="last-modified">Last modified: 27 février 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="002-00-typescript.html" class="navigation-links__prev">TypeScript</a><a href="004-00-organisation-du-code.html" class="navigation-links__next">Organisation du code</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.10.0-b575/app.js"></script></body></html>

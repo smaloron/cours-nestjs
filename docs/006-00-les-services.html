@@ -1,0 +1,428 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#307FFF"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2025-02-27T07:16:03.122405"><title>Les services | nestjs</title><script type="application/json" id="virtual-toc-data">[{"id":"l-injection-de-d-pendance","level":0,"title":"L\u0027injection de dépendance","anchor":"#l-injection-de-d-pendance"},{"id":"un-peu-de-vocabulaire","level":0,"title":"Un peu de vocabulaire","anchor":"#un-peu-de-vocabulaire"},{"id":"cr-ation-d-un-repository","level":0,"title":"Création d\u0027un repository","anchor":"#cr-ation-d-un-repository"},{"id":"exercice","level":0,"title":"Exercice","anchor":"#exercice"},{"id":"exporter-un-module","level":0,"title":"Exporter un module","anchor":"#exporter-un-module"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.10.0-b575/app.css" rel="stylesheet"><meta name="msapplication-TileColor" content="#000000"><link rel="apple-touch-icon" sizes="180x180" href="https://jetbrains.com/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://jetbrains.com/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://jetbrains.com/favicon-16x16.png"><meta name="msapplication-TileImage" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-144x144.png"><meta name="msapplication-square70x70logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-70x70.png"><meta name="msapplication-square150x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x150.png"><meta name="msapplication-square310x310logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x310.png"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Les services | nestjs"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="nestjs Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/006-00-les-services.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="Les services | nestjs"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/006-00-les-services.html#webpage",
+    "url": "writerside-documentation/006-00-les-services.html",
+    "name": "Les services | nestjs",
+    "description": "",
+    "image": "",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "nestjs Help"
+}</script><!-- End Schema.org --></head><body data-id="006-00-Les-services" data-main-title="Les services" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs=""><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>nestjs  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="006-00-Les-services" id="006-00-Les-services.md">Les services</h1><section class="chapter"><h2 id="l-injection-de-d-pendance" data-toc="l-injection-de-d-pendance">L'injection de d&eacute;pendance</h2><p id="uf0vmy_8">NestJS utilise un conteneur d&rsquo;injection de d&eacute;pendances qui permet de fournir et injecter automatiquement des classes/services dans d'autres classes sans avoir besoin de les instancier manuellement.</p><p id="uf0vmy_9"><span class="control" id="uf0vmy_12">Concepts cl&eacute;s :</span></p><ul class="list _bullet" id="uf0vmy_10"><li class="list__item" id="uf0vmy_13"><p>Provider : Une classe qui peut &ecirc;tre inject&eacute;e dans d'autres classes.</p></li><li class="list__item" id="uf0vmy_14"><p>Injectable : Un d&eacute;corateur (<code class="code" id="uf0vmy_17">@Injectable()</code>) qui indique qu'un service peut &ecirc;tre inject&eacute;.</p></li><li class="list__item" id="uf0vmy_15"><p>Module : Un regroupement de fonctionnalit&eacute;s (services, contr&ocirc;leurs, etc.).</p></li><li class="list__item" id="uf0vmy_16"><p>Injection automatique : NestJS g&egrave;re automatiquement la cr&eacute;ation et l&rsquo;injection des d&eacute;pendances.</p></li></ul><section class="chapter"><h3 id="exemple-d-injection-de-d-pendance" data-toc="exemple-d-injection-de-d-pendance">Exemple d'injection de d&eacute;pendance</h3><section class="chapter"><h4 id="le-service" data-toc="le-service">Le service</h4><p id="uf0vmy_21">Un service est une classe d&eacute;cor&eacute;e par <code class="code" id="uf0vmy_23">@Injectable()</code> et qui poss&egrave;de des m&eacute;thodes ou des propri&eacute;t&eacute;s publiques utilisables pour d'autres classes.</p><div class="code-block" data-lang="ts">
+// person/tax.service.ts
+
+import { Injectable } from '@nestjs/common';
+
+// Décorateur qui rend cette classe injectable
+@Injectable() 
+export class TaxService {
+
+  readonly taxMultiplier: number = 1.2;
+
+  getGrossPrice(netPrice: number): number {
+    return netPrice * taxMultiplier;
+  }
+}
+</div></section><section class="chapter"><h4 id="la-d-claration-dans-un-module" data-toc="la-d-claration-dans-un-module">La d&eacute;claration dans un module</h4><p id="uf0vmy_24">Pour que le service soit injectable, il faut les d&eacute;clarer dabs le tableau <code class="code" id="uf0vmy_26">providers</code> d'un module.</p><div class="code-block" data-lang="ts">
+import { Module } from '@nestjs/common';
+import { PersonController } from './person.controller';
+import { PersonProvider } from './tax.service';
+
+@Module({
+  controllers: [PersonController],
+  // Déclaration du service
+  providers: [TaxService]
+})
+export class PersonModule {}
+</div></section><section class="chapter"><h4 id="utilisation-dans-un-contr-leur" data-toc="utilisation-dans-un-contr-leur">Utilisation dans un contr&ocirc;leur</h4><p id="uf0vmy_27">Nous n'avons plus qu'&agrave; injecter le service et l'utiliser dans un contr&ocirc;leur par exemple.</p><div class="code-block" data-lang="ts">
+import { Controller, Get, 
+         ParseFloatPipe 
+} from '@nestjs/common';
+
+import { TaxService } from './tax.service';
+
+@Controller('tax')
+export class UserController {
+
+  // Injection du service dans le constructeur
+  constructor(private readonly taxService: TaxService) {}
+
+  @Get()
+  getTax(@Param('netPrice', ParseFloatPipe): number {
+    return this.taxService.getGrossPrice(netPrice);
+  }
+}
+</div></section></section></section><section class="chapter"><h2 id="un-peu-de-vocabulaire" data-toc="un-peu-de-vocabulaire">Un peu de vocabulaire</h2><p id="uf0vmy_29">Les diverses sources d'information sur NestJS utilisent souvent les termes de <code class="code" id="uf0vmy_33">provider</code>, <code class="code" id="uf0vmy_34">services</code> et <code class="code" id="uf0vmy_35">repository</code>.</p><section class="chapter"><h3 id="provider" data-toc="provider">Provider</h3><p id="uf0vmy_36">Un provider est un terme g&eacute;n&eacute;rique en NestJS qui d&eacute;signe toute classe pouvant &ecirc;tre inject&eacute;e dans une autre. Cela inclut les services, repositories, factories, helpers, etc.</p></section><section class="chapter"><h3 id="repository" data-toc="repository">Repository</h3><p id="uf0vmy_37">Un repository est un provider sp&eacute;cifique qui g&egrave;re l'acc&egrave;s aux donn&eacute;es. En g&eacute;n&eacute;ral, il est utilis&eacute; pour interagir avec une base de donn&eacute;es via TypeORM, Mongoose ou Prisma.</p></section><section class="chapter"><h3 id="service" data-toc="service">Service</h3><p id="uf0vmy_38">Un service est une classe qui encapsule la logique m&eacute;tier. Il est g&eacute;n&eacute;ralement inject&eacute; dans des contr&ocirc;leurs pour ex&eacute;cuter des actions sp&eacute;cifiques. Les services peuvent aussi utiliser d'autres providers, comme des repositories ou des API externes.</p></section></section><section class="chapter"><h2 id="cr-ation-d-un-repository" data-toc="cr-ation-d-un-repository">Cr&eacute;ation d'un repository</h2><p id="uf0vmy_39">Nous allons cr&eacute;er un repository pour simuler une connexion &agrave; une base de donn&eacute;es.</p><p id="uf0vmy_40">La commande suivante g&eacute;n&egrave;re une classe <code class="code" id="uf0vmy_54">PersonService</code> dans le dossier <code class="code" id="uf0vmy_55">person</code>. Elle r&eacute;f&eacute;rence &eacute;galement cette nouvelle classe dans le tableau <code class="code" id="uf0vmy_56">providers</code> de <code class="code" id="uf0vmy_57">PersonModule</code>.</p><div class="code-block" data-lang="bash">
+nest generate service person
+</div><p id="uf0vmy_42">Renommons cette classe <code class="code" id="uf0vmy_58">PersonRepository</code> et le fichier <code class="code" id="uf0vmy_59">person.repository.ts</code> (sans oublier de changer l'import dans <code class="code" id="uf0vmy_60">person.module.ts</code>)</p><div class="code-block" data-lang="ts">
+// person/person.repository.ts
+
+import { Injectable } from '@nestjs/common';
+
+@Injectable()
+export class PersonRepository {}
+</div><div class="code-block" data-lang="ts">
+import { Module } from '@nestjs/common';
+import { PersonController } from './person.controller';
+import { PersonRepository } from './person.repository';
+
+@Module({
+  controllers: [PersonController],
+  providers: [PersonRepository,]
+})
+export class PersonModule {}
+
+</div><section class="chapter"><h3 id="interface" data-toc="interface">Interface</h3><p id="uf0vmy_61">Dans <code class="code" id="uf0vmy_63">person.repository.ts</code>, nous d&eacute;finissons une interface pour nos personnes.</p><div class="code-block" data-lang="ts">
+import { Injectable } from '@nestjs/common';
+
+export interface PersonInterface {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  age: number;
+  company?: string;
+  jobTitle?: string;
+}
+
+@Injectable()
+export class PersonRepository {}
+</div></section><section class="chapter"><h3 id="modification-du-dto" data-toc="modification-du-dto">Modification du DTO</h3><p id="uf0vmy_64">Ajoutons une propri&eacute;t&eacute; <code class="code" id="uf0vmy_66">id</code> optionnelle au DTO pour g&eacute;rer l'ajout d'une nouvelle personne.</p><div class="code-block" data-lang="ts">
+// dans person/person.dto.ts
+
+export class CreatePersonDto {
+
+  @IsOptional()
+  @IsInt()
+  id: number
+ 
+ // ...suite de la classe 
+}
+</div></section><section class="chapter"><h3 id="donn-es-de-test" data-toc="donn-es-de-test">Donn&eacute;es de test</h3><p id="uf0vmy_67">Toujours dans <code class="code" id="uf0vmy_69">person.repository.ts</code>, nous d&eacute;finissons un tableau d'objet qui nous servira &agrave; simuler un appel &agrave; une base de donn&eacute;es.</p><div class="code-block" data-lang="ts">
+// dans person.repository.ts
+
+@Injectable()
+export class PersonRepository {
+  private persons: PersonInterface[] = [
+    {
+      id: 1, firstName: 'Ada', lastName: 'Lovelace',
+      age: 30, email: 'ada@algo.com'
+    },
+    {
+      id: 2, firstName: 'Grace', lastName: 'Hopper',
+      age: 40, email: 'grace.hopper@algo.com'
+    }
+  ];
+}
+</div></section><section class="chapter"><h3 id="premi-re-m-thode-findall" data-toc="premi-re-m-thode-findall">Premi&egrave;re m&eacute;thode : findAll</h3><p id="uf0vmy_70">Cette m&eacute;thode retournera toutes les donn&eacute;es du tableau <code class="code" id="uf0vmy_74">persons</code>. Cette op&eacute;ration n'est pas asynchrone, mais l'appel &agrave; une base de donn&eacute;es le sera, pour les besoins de la simulation, nous d&eacute;finirons donc cette m&eacute;thode comme &eacute;tant asynchrone.</p><p id="uf0vmy_71">Le retour de la m&eacute;thode <code class="code" id="uf0vmy_75">PersonInterface[]</code> est enrob&eacute; dans une promesse puisque la fonction est asynchrone.</p><div class="code-block" data-lang="ts">
+
+async findAll(): Promise&lt;PersonInterface[]&gt;{
+    return this.persons;
+}
+</div><section class="chapter"><h4 id="le-contr-leur" data-toc="le-contr-leur">Le contr&ocirc;leur</h4><p id="uf0vmy_76">Modifions ensuite le contr&ocirc;leur.</p><p id="uf0vmy_77">Tout d'abord injectons le service dans un constructeur</p><div class="code-block" data-lang="ts">
+import { PersonRepository } from './person.repository';
+
+constructor(
+    private personRepository: PersonRepository
+) {}
+</div><p id="uf0vmy_79">Ensuite, modifions la m&eacute;thode <code class="code" id="uf0vmy_82">getAll</code> du contr&ocirc;leur.</p><ul class="list _bullet" id="uf0vmy_80"><li class="list__item" id="uf0vmy_83"><p>La m&eacute;thode devient asynchrone.</p></li><li class="list__item" id="uf0vmy_84"><p>Le retour est enrob&eacute; dans une promesse.</p></li><li class="list__item" id="uf0vmy_85"><p>Les donn&eacute;es sont obtenues par un appel &agrave; la m&eacute;thode <code class="code" id="uf0vmy_87">findAll</code> de <code class="code" id="uf0vmy_88">PersonRepository</code>.</p></li><li class="list__item" id="uf0vmy_86"><p>Comme cet appel est asynchrone, il faut r&eacute;soudre la promesse,avec <code class="code" id="uf0vmy_89">await</code> (ou en utilisant la fonction <code class="code" id="uf0vmy_90">then</code>et en passant une fonction de callback).</p></li></ul><div class="code-block" data-lang="ts">
+async getAll(
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number
+  ):Promise&lt;ReturnMessageInterface&gt;
+  {
+    const persons = await this.personRepository.findAll()
+    
+    return {
+      action: actions.READ,
+      message: `Liste de toutes les personnes page ${page}`,
+      success: true,
+      data: persons
+    };
+  }
+</div></section></section><section class="chapter"><h3 id="m-thode-findonebyid" data-toc="m-thode-findonebyid">M&eacute;thode findOneById</h3><div class="code-block" data-lang="ts">
+async findOneById(id: number): Promise&lt;PersonInterface&gt; 
+{
+  // Recherche d'une personne dans le tableau  
+  const person = this.persons.find(person =&gt; person.id === id);
+  
+  // Exception si aucune personne trouvée
+  if(!person) {
+    throw new NotFoundException(`Aucune personne avec l'id ${id}`);
+  }
+  
+  return person;
+}
+</div><section class="chapter"><h4 id="le-controleur_1" data-toc="le-controleur_1">Le contr&ocirc;leur</h4><div class="code-block" data-lang="ts">
+@Get(':id')
+  async getOne(
+    @Param('id', new ParseIntPipe()) id: number
+  ):Promise&lt;ReturnMessageInterface&gt;
+  {
+    const person = await this.personRepository.findOneById(id);
+    return {
+      action: actions.READ,
+      message: `Une personne dont l'id est ${id}`,
+      success: true,
+      data: person
+    };
+  }
+</div></section></section><section class="chapter"><h3 id="la-m-thode-insert" data-toc="la-m-thode-insert">La m&eacute;thode insert</h3><p id="uf0vmy_94">Pour l'insertion, nous r&eacute;cup&eacute;rons un objet de type <code class="code" id="uf0vmy_98">CreatePersonDto</code> qui contient les donn&eacute;es.</p><p id="uf0vmy_95">Nous lui ajoutons un id (le timestamp en ms).</p><div class="code-block" data-lang="ts">
+  async insert(
+        person: CreatePersonDto
+  ): Promise&lt;PersonInterface&gt; 
+  {
+    // Ajout d'un id
+    person.id = new Date().getTime();
+    // Ajout de la personne au tableau
+    this.persons.push(person);
+
+    return person;
+  }
+</div><section class="chapter"><h4 id="le-controleur_2" data-toc="le-controleur_2">Le contr&ocirc;leur</h4><div class="code-block" data-lang="ts">
+@Post()
+async insert(
+    @Body() person: any
+  ):Promise&lt;ReturnMessageInterface&gt;
+  {
+    const savedPerson = await this.personRepository.insert(person);
+    return {
+      action: actions.INSERT,
+      message: `Ajout d'une personne`,
+      success: true,
+      data: savedPerson
+    };
+}
+</div></section></section><section class="chapter"><h3 id="la-m-thode-delete" data-toc="la-m-thode-delete">La m&eacute;thode delete</h3><div class="code-block" data-lang="ts">
+async delete(id: number): Promise&lt;boolean&gt; {
+  // index de la personne en fonction de son id
+  let index = this.persons.findIndex(
+    person =&gt; person.id === id
+  );
+  
+  // Exception si non trouvé
+  if (index == -1) {
+    throw new NotFoundException(`Aucune personne avec l'id ${id}`);
+  }
+
+  // Suppression dans le tableau
+  this.persons.splice(index, 1);
+  
+  return true;
+}
+</div><section class="chapter"><h4 id="le-controleur_3" data-toc="le-controleur_3">Le contr&ocirc;leur</h4><div class="code-block" data-lang="ts">
+@Delete(':id')
+async delete(
+    @Param('id', new ParseIntPipe()) id: number,
+): Promise&lt;ReturnMessageInterface&gt;
+{
+    const result:boolean = await this.personRepository.delete(id);
+    return {
+      action: actions.DELETE,
+      message: `Suppression d'une personne 
+                dont l'id est ${id}`,
+      success: result,
+      data: null
+    };
+}
+</div></section></section><section class="chapter"><h3 id="la-m-thode-replace" data-toc="la-m-thode-replace">La m&eacute;thode replace</h3><div class="code-block" data-lang="ts">
+async replace(
+    id: number, 
+    person: CreatePersonDto
+): Promise&lt;PersonInterface&gt; 
+{
+  let index = this.persons.findIndex(
+    person =&gt; person.id === id
+  );
+  if (index == -1) {
+    throw new NotFoundException(`Aucune personne avec l'id ${id}`);
+  }
+  // Ajout de l'id au DTO
+  person.id = Number(id);
+  
+  // Remplacement de la personne
+  this.persons[index]= person;
+  
+  return person;
+}
+</div><section class="chapter"><h4 id="le-controleur_4" data-toc="le-controleur_4">Le contr&ocirc;leur</h4><div class="code-block" data-lang="ts">
+@Put(':id')
+async replace(
+    @Param('id', new ParseIntPipe()) id: number,
+    @Body() person: CreatePersonDto
+):Promise&lt;ReturnMessageInterface&gt;
+{
+    const replacedPerson = await this.personRepository
+                                     .replace(id, person);
+    return {
+      action: actions.UPDATE,
+      message: `Remplacement d'une personne`,
+      success: true,
+      data: replacedPerson
+    };
+}
+</div></section></section><section class="chapter"><h3 id="la-m-thode-update" data-toc="la-m-thode-update">La m&eacute;thode update</h3><div class="code-block" data-lang="ts">
+async update(
+    id: number, 
+    person: UpdatePersonDto
+): Promise&lt;PersonInterface&gt; 
+{
+    // Recherche de la personne à modifier
+    let found = await this.findOneById(id);
+    
+    if (!found) {
+      throw new NotFoundException(`Aucune personne avec l'id ${id}`);
+    }
+
+    // Fusion de l'objet found avec le DTO
+    for (const key in found) {
+      if (key in person) {
+        found[key] = person[key];
+      }
+    }
+
+    return found;
+}
+</div><section class="chapter"><h4 id="le-controleur_5" data-toc="le-controleur_5">Le contr&ocirc;leur</h4><div class="code-block" data-lang="ts">
+@Patch(':id')
+async update(
+    @Param('id', new ParseIntPipe()) id: number,
+    @Body() person: UpdatePersonDto
+): Promise&lt;ReturnMessageInterface&gt;
+{
+    const updatedPerson = await this.personRepository.update(id, person);
+    return {
+      action: actions.UPDATE,
+      message: `Modification d'une personne`,
+      success: true,
+      data: updatedPerson
+    };
+}
+</div></section></section></section><section class="chapter"><h2 id="exercice" data-toc="exercice">Exercice</h2><p id="uf0vmy_109">Faire de m&ecirc;me pour books :</p><ul class="list _bullet" id="uf0vmy_110"><li class="list__item" id="uf0vmy_111"><p>Cr&eacute;er une classe <code class="code" id="uf0vmy_114">BookRepository</code>.</p></li><li class="list__item" id="uf0vmy_112"><p>Modifier le contr&ocirc;leur <code class="code" id="uf0vmy_115">BookController</code>.</p></li><li class="list__item" id="uf0vmy_113"><p>Tester l'api.</p></li></ul></section><section class="chapter"><h2 id="exporter-un-module" data-toc="exporter-un-module">Exporter un module</h2><p id="uf0vmy_116">Il arrive qu'un module ait besoin des Ressources d'un autre module pour travailler. Dans ce cas, nous pouvons exporter un &eacute;l&eacute;ment d'un module afin de pouvoir l'importer ailleurs.</p><section class="chapter"><h3 id="un-exemple" data-toc="un-exemple">Un exemple</h3><p id="uf0vmy_118">Commen&ccedil;ons par cr&eacute;er deux modules, <code class="code" id="uf0vmy_125">UserModule</code> et <code class="code" id="uf0vmy_126">AuthModule</code>.</p><div class="code-block" data-lang="bash">
+nest generate module user
+</div><div class="code-block" data-lang="bash">
+nest generate module auth
+</div><p id="uf0vmy_121">Ajoutons &eacute;galement une interface pour l'authentification.</p><div class="code-block" data-lang="ts">
+// dans common/interfaces/common.intefaces.ts
+
+export interface Credentials {
+  username: string;
+  password: string;
+}
+
+</div><section class="chapter"><h4 id="usermodule" data-toc="usermodule">UserModule</h4><p id="uf0vmy_127">Dans <code class="code" id="uf0vmy_130">UserModule</code>, nous allons cr&eacute;er un service <code class="code" id="uf0vmy_131">UserService</code>, ce service devra &ecirc;tre export&eacute; car <code class="code" id="uf0vmy_132">AuthModule</code> en aura besoin.</p><div class="code-block" data-lang="ts">
+// user/user.service.ts
+import { Injectable } from '@nestjs/common';
+import { Credentials } from '../common/interfaces/common.interfaces';
+
+@Injectable()
+export class UserService {
+  async findUserByEmail(
+    email: string
+  ): Promise&lt;Credentials&gt; {
+    return {username: email, password: '123'};
+  }
+}
+</div><div class="code-block" data-lang="ts">
+// user/user.module.ts
+
+import { Module } from '@nestjs/common';
+import { UserService } from './user.service';
+
+@Module({
+  providers: [UserService],
+  // Export de UserService 
+  // afin de le rendre disponible
+  // pour les autres modules
+  exports: [UserService]
+})
+export class UserModule {}
+</div></section><section class="chapter"><h4 id="authmodule" data-toc="authmodule">AuthModule</h4><p id="uf0vmy_133">Dans <code class="code" id="uf0vmy_141">AuthModule</code>, il faut importer <code class="code" id="uf0vmy_142">UserModule</code> afin d'utiliser une de ses ressources comme provider.</p><div class="code-block" data-lang="ts">
+// auth/auth.module.ts
+
+import { Module } from '@nestjs/common';
+import { UserService } from '../user/user.service';
+import { AuthController } from './auth.controller';
+import { AuthService } from './auth.service';
+import { UserModule } from '../user/user.module';
+
+@Module({
+  // Importation de UserModule
+  imports: [UserModule],
+  // Pour rendre UserService disponible
+  providers: [UserService, AuthService],
+  controllers: [AuthController]
+})
+export class AuthModule {}
+</div><p id="uf0vmy_135">Ici <code class="code" id="uf0vmy_143">UserService</code> est inject&eacute; dans <code class="code" id="uf0vmy_144">AuthService</code></p><div class="code-block" data-lang="ts">
+// auth/auth.service.ts
+
+import { Injectable } from '@nestjs/common';
+import { UserService } from '../user/user.service';
+import { Credentials } from '../common/interfaces/common.interfaces';
+
+
+@Injectable()
+export class AuthService {
+  constructor(private readonly usersService: UserService) {}
+
+  async validateUser(
+    credentials: Credentials
+ ): Promise&lt;boolean&gt; 
+ {
+    const user = await this
+                 .usersService
+                 .findUserByEmail(credentials.username);
+    
+    return user 
+           &amp;&amp; user.password === credentials.password;
+  }
+}
+</div><p id="uf0vmy_137">Et enfin, nous pouvons cr&eacute;er un contr&ocirc;leur pour tester ce partage de ressources.</p><div class="code-block" data-lang="ts">
+// auth/auth.controller.ts
+
+mport { Body, Controller, Param, Post } from '@nestjs/common';
+import { AuthService } from './auth.service';
+import { Credentials } from '../common/interfaces/common.interfaces';
+
+@Controller('auth')
+export class AuthController {
+
+  constructor(
+    private readonly authService: AuthService
+  ) {}
+
+
+  @Post('login')
+  async login(
+      @Body()
+      credentials: Credentials
+  ): Promise&lt;any&gt;
+    {
+    const success: boolean = await this
+      .authService
+      .validateUser(credentials);
+
+    return {
+      success
+    }
+
+  }
+
+}
+</div><p id="uf0vmy_139">Et un test</p><div class="code-block" data-lang="none">
+### Test de l'authentification
+
+POST http://localhost:3000/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  &quot;username&quot;: &quot;joe&quot;,
+  &quot;password&quot;: &quot;123&quot;
+}
+</div></section></section></section><div class="last-modified">Last modified: 27 février 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="005-00-la-validation.html" class="navigation-links__prev">La validation des requ&ecirc;tes</a><a href="007-00-liaison-avec-mongodb.html" class="navigation-links__next">NestJS et MongoDB</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.10.0-b575/app.js"></script></body></html>
