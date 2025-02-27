@@ -1,0 +1,147 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#307FFF"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2025-02-27T21:47:43.899617"><title>Les tests | nestjs</title><script type="application/json" id="virtual-toc-data">[{"id":"test-de-bout-en-bout","level":0,"title":"Test de bout en bout","anchor":"#test-de-bout-en-bout"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.10.0-b575/app.css" rel="stylesheet"><meta name="msapplication-TileColor" content="#000000"><link rel="apple-touch-icon" sizes="180x180" href="https://jetbrains.com/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://jetbrains.com/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://jetbrains.com/favicon-16x16.png"><meta name="msapplication-TileImage" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-144x144.png"><meta name="msapplication-square70x70logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-70x70.png"><meta name="msapplication-square150x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x150.png"><meta name="msapplication-square310x310logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x310.png"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Les tests | nestjs"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="nestjs Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/016-00-les-tests.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="Les tests | nestjs"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/016-00-les-tests.html#webpage",
+    "url": "writerside-documentation/016-00-les-tests.html",
+    "name": "Les tests | nestjs",
+    "description": "",
+    "image": "",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "nestjs Help"
+}</script><!-- End Schema.org --></head><body data-id="016-00-Les-tests" data-main-title="Les tests" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs=""><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>nestjs  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="016-00-Les-tests" id="016-00-Les-tests.md">Les tests</h1><section class="chapter"><h2 id="test-de-bout-en-bout" data-toc="test-de-bout-en-bout">Test de bout en bout</h2><section class="chapter"><h3 id="installation" data-toc="installation">Installation</h3><div class="code-block" data-lang="bash">
+npm install --save-dev @nestjs/testing @nestjs/core supertest jest
+
+npm install --save-dev mongodb-memory-server jest-mongodb
+</div></section><section class="chapter"><h3 id="simuler-la-base-de-donn-es" data-toc="simuler-la-base-de-donn-es">Simuler la base de donn&eacute;es</h3><div class="code-block" data-lang="ts">
+// test/setup.ts
+
+import { MongoMemoryServer } from 'mongodb-memory-server';
+import mongoose from 'mongoose';
+
+let mongod: MongoMemoryServer;
+
+export const connectTestDB = async () =&gt; {
+  mongod = await MongoMemoryServer.create();
+  const uri = mongod.getUri();
+
+  await mongoose.connect(uri);
+};
+
+export const closeTestDB = async () =&gt; {
+  await mongoose.connection.dropDatabase();
+  await mongoose.connection.close();
+  await mongod.stop();
+};
+
+</div></section><section class="chapter"><h3 id="configurer-les-tests" data-toc="configurer-les-tests">Configurer les tests</h3><div class="code-block" data-lang="json">
+{
+  &quot;moduleFileExtensions&quot;: [&quot;js&quot;, &quot;json&quot;, &quot;ts&quot;],
+  &quot;rootDir&quot;: &quot;../&quot;,
+  &quot;testRegex&quot;: &quot;.e2e-spec.ts$&quot;,
+  &quot;transform&quot;: {
+    &quot;^.+\\.ts$&quot;: &quot;ts-jest&quot;
+  },
+  &quot;setupFilesAfterEnv&quot;: [&quot;&lt;rootDir&gt;/test/setup.ts&quot;]
+}
+</div><ol class="list _decimal" id="-p4r4wo_12" type="1"><li class="list__item" id="-p4r4wo_22"><p><span class="control" id="-p4r4wo_23">moduleFileExtensions</span> D&eacute;finit les extensions de fichiers que Jest reconna&icirc;t et peut importer lors des tests.</p></li></ol><div class="code-block" data-lang="none">
+&quot;js&quot; : Fichiers JavaScript.
+&quot;json&quot; : Fichiers JSON.
+&quot;ts&quot; : Fichiers TypeScript.
+</div><ol class="list _decimal" id="-p4r4wo_14" type="1" start="2"><li class="list__item" id="-p4r4wo_24"><p><span class="control" id="-p4r4wo_25">rootDir</span> Sp&eacute;cifie le r&eacute;pertoire racine des tests.</p></li></ol><p id="-p4r4wo_15"><code class="code" id="-p4r4wo_26">../</code> signifie que Jest ex&eacute;cutera les tests &agrave; partir du dossier parent du fichier de configuration.</p><ol class="list _decimal" id="-p4r4wo_16" type="1" start="3"><li class="list__item" id="-p4r4wo_27"><p><span class="control" id="-p4r4wo_28">testRegex</span> Indique le motif des fichiers de test que Jest doit d&eacute;tecter.</p></li></ol><p id="-p4r4wo_17"><code class="code" id="-p4r4wo_29">.e2e-spec.ts$</code>: Tous les fichiers qui terminent par .e2e-spec.ts seront ex&eacute;cut&eacute;s comme tests E2E.</p><ol class="list _decimal" id="-p4r4wo_18" type="1" start="4"><li class="list__item" id="-p4r4wo_30"><p><span class="control" id="-p4r4wo_31">transform</span> D&eacute;finit comment Jest doit transformer les fichiers avant ex&eacute;cution.</p></li></ol><p id="-p4r4wo_19"><code class="code" id="-p4r4wo_32">&quot;^.+\\.ts$&quot;: &quot;ts-jest&quot;</code>: Tous les fichiers TypeScript (.ts) seront transform&eacute;s avec ts-jest, un pr&eacute;processeur Jest pour ex&eacute;cuter directement du TypeScript.</p><ol class="list _decimal" id="-p4r4wo_20" type="1" start="5"><li class="list__item" id="-p4r4wo_33"><p><span class="control" id="-p4r4wo_34">setupFilesAfterEnv</span> Sp&eacute;cifie les fichiers qui seront ex&eacute;cut&eacute;s apr&egrave;s l&rsquo;initialisation de Jest mais avant les tests.</p></li></ol><p id="-p4r4wo_21"><code class="code" id="-p4r4wo_35">&quot;&lt;rootDir&gt;/test/setup.ts&quot;</code>: Permet d&rsquo;ex&eacute;cuter du code de configuration avant les tests (ex: mocks, configuration de base de donn&eacute;es, variables globales).</p></section><section class="chapter"><h3 id="la-commande-de-lancement-des-tests" data-toc="la-commande-de-lancement-des-tests">La commande de lancement des tests</h3><p id="-p4r4wo_36">Modifier <code class="code" id="-p4r4wo_38">package.json</code></p><div class="code-block" data-lang="json">
+&quot;scripts&quot;: {
+  &quot;test:e2e&quot;: &quot;jest --config ./test/jest-e2e.json&quot;
+}
+</div></section><section class="chapter"><h3 id="un-test" data-toc="un-test">Un test</h3><ul class="list _bullet" id="-p4r4wo_39"><li class="list__item" id="-p4r4wo_41"><p><code class="code" id="-p4r4wo_46">@nestjs/testing</code>: Utilis&eacute; pour cr&eacute;er un module de test NestJS.</p></li><li class="list__item" id="-p4r4wo_42"><p><code class="code" id="-p4r4wo_47">INestApplication</code>: Interface pour manipuler l'application NestJS.</p></li><li class="list__item" id="-p4r4wo_43"><p><code class="code" id="-p4r4wo_48">supertest</code>: Permet d'effectuer des requ&ecirc;tes HTTP pour tester l'API.</p></li><li class="list__item" id="-p4r4wo_44"><p><code class="code" id="-p4r4wo_49">AppModule</code>: Charge le module principal de l'application.</p></li><li class="list__item" id="-p4r4wo_45"><p><code class="code" id="-p4r4wo_50">connectTestDB</code> et <code class="code" id="-p4r4wo_51">closeTestDB</code>: Fonctions d&eacute;finies dans <code class="code" id="-p4r4wo_52">setup.ts</code> pour g&eacute;rer la base de donn&eacute;es MongoDB en m&eacute;moire.</p></li></ul><div class="code-block" data-lang="ts">
+// person-e2e.spec.ts
+
+import { Test, TestingModule } from '@nestjs/testing';
+import { INestApplication } from '@nestjs/common';
+import * as request from 'supertest';
+import { AppModule } from '../src/app.module';
+import { connectTestDB, closeTestDB } from './setup';
+
+describe('Person End-to-End Test', () =&gt; {
+  let app: INestApplication;
+  
+  // Stocke l'ID d'une personne pour les tests
+  let personId: string; 
+
+  // Initialisation de l'application
+  // et de la base de données 
+  // avant le lancement des tests
+  beforeAll(async () =&gt; {
+    await connectTestDB(); // Connexion à la base de test
+
+    const moduleFixture: TestingModule = await Test.createTestingModule({
+      imports: [AppModule],
+    }).compile();
+
+    app = moduleFixture.createNestApplication();
+    await app.init();
+  });
+
+  // Nettoyage après les tests
+  afterAll(async () =&gt; {
+    await closeTestDB(); // Fermer la base de test
+    await app.close();
+  });
+
+  // Test de la route POST /person
+  it('/person (POST) should create a new person', async () =&gt; {
+    const personData = { name: 'Alice Doe', age: 30 };
+    const response = await request(app.getHttpServer())
+      .post('/person')
+      .send(personData);
+      
+    // Assertions
+    expect(response.status).toBe(201);
+    expect(response.body).toHaveProperty('_id');
+    
+    // Stocker l'ID pour les prochains tests
+    personId = response.body._id; 
+  });
+
+  it('/person (GET) should return all persons', async () =&gt; {
+    const response = await request(app.getHttpServer()).get('/person');
+    
+    expect(response.status).toBe(200);
+    expect(Array.isArray(response.body.data)).toBe(true);
+  });
+
+  it('/person/:id (GET) should return a person by ID', async () =&gt; {
+    const response = await request(app.getHttpServer()).get(`/person/${personId}`);
+    
+    expect(response.status).toBe(200);
+    expect(response.body.data).toHaveProperty('_id', personId);
+  });
+
+  it('/person/:id (PUT) should update a person', async () =&gt; {
+    const updateData = { name: 'Alice Updated', age: 35 };
+    const response = await request(app.getHttpServer())
+      .put(`/person/${personId}`)
+      .send(updateData);
+    
+    expect(response.status).toBe(200);
+    expect(response.body.data.name).toBe('Alice Updated');
+  });
+
+  it('/person/:id (DELETE) should delete a person', async () =&gt; {
+    const response = await request(app.getHttpServer()).delete(`/person/${personId}`);
+    
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty('deleted', true);
+  });
+
+  it('/person/:id (GET) should return 404 after deletion', async () =&gt; {
+    const response = await request(app.getHttpServer()).get(`/person/${personId}`);
+    
+    expect(response.status).toBe(404);
+  });
+});
+
+</div></section></section><div class="last-modified">Last modified: 27 février 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="015-00-la-securite.html" class="navigation-links__prev">La s&eacute;curit&eacute;</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.10.0-b575/app.js"></script></body></html>
