@@ -15,4 +15,5 @@
     <toc-element topic="007-00-Liaison-avec-MongoDB.md"/>
     <toc-element topic="008-00-Plus-loin-avec-Mongoose.md"/>
     <toc-element topic="015-00-La-securite.md"/>
+    <toc-element topic="016-00-Les-tests.md"/>
 </instance-profile>
